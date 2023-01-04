@@ -1,0 +1,95 @@
+﻿@model ProductVM
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <div class="border p-3 pt-4 row">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Product</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Product.Name" class="form-label"></label>
+            <input asp-for="Product.Name" class="form-control" />
+            <span asp-validation-for="Product.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Product.Description" class="form-label"></label>
+            <textarea asp-for="Product.Description" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Product.Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Product.ISBN" class="form-label"></label>
+            <input asp-for="Product.ISBN" class="form-control" />
+            <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Product.Author" class="form-label"></label>
+            <input asp-for="Product.Author" class="form-control" />
+            <span asp-validation-for="Product.Author" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Product.ListPrice" class="form-label"></label>
+            <input asp-for="Product.ListPrice" class="form-control" />
+            <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Product.Price" class="form-label"></label>
+            <input asp-for="Product.Price" class="form-control" />
+            <span asp-validation-for="Product.Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Product.Price50" class="form-label"></label>
+            <input asp-for="Product.Price50" class="form-control" />
+            <span asp-validation-for="Product.Price50" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Product.Price100" class="form-label"></label>
+            <input asp-for="Product.Price100" class="form-control" />
+            <span asp-validation-for="Product.Price100" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Product.ImageUrl" class="form-label"></label>
+            <input type="file" id="uploadBox" asp-for="Product.ImageUrl" name="file" class="form-control" />
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Product.CategoryId" class="form-label"></label>
+            <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
+                <option disabled selected>--Select Category--</option>
+            </select>
+            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Product.CoverTypeId" class="form-label"></label>
+            <select asp-for="Product.CoverTypeId" asp-items="@Model.CoverTypeList" class="form-select">
+                <option disabled selected>--Select CoverType--</option>
+            </select>
+            <span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <button type="submit" onclick="validateInput()" class="btn btn-primary">Update</button>
+            <a asp-controller="Product" asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        function validateInput() {
+            if (document.getElementById('uploadBox').value == '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
+
